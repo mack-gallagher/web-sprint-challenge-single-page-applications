@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.pizza-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#pizza-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+}
+
+#order-button {
+  width: 30%;
+}
