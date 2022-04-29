@@ -8,6 +8,9 @@ import * as yup from 'yup';
 import schema from './validation/schema.js';
 /* ********** */
 
+/* API CALL */
+import axios from 'axios';
+/* ******* */
 
 const App = () => {
 
@@ -39,6 +42,13 @@ const App = () => {
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(true);
 
+  const validate = (name, value) => {
+    yup.reach(schema, name)
+      .validate(value)
+        .then(res => setFormErrors({ ...formErrors, [name]: "" }))
+        .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0]}))
+  }
+
   const onChange = evt => {
     const name = evt.target.name;
     const value = evt.target.type === 'checkbox' ? evt.target.checked : evt.target.value;
@@ -46,11 +56,31 @@ const App = () => {
     setFormValues({ ...formValues, [name]: value });
   }
 
-  const validate = (name, value) => {
-    yup.reach(schema, name)
-      .validate(value)
-        .then(res => setFormErrors({ ...formErrors, [name]: "" }))
-        .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0]}))
+  const onSubmit = evt => {
+    evt.preventDefault();
+    const newOrder = {
+                       name: formValues.name,
+                       size: formValues.size, 
+                       toppings: [
+                                   "pepperoni",
+                                   "sausage",
+                                   "olives",
+                                   "onions",
+                                   "pineapple",
+                                   "peppers",
+                                 ]
+                                   .filter(topping => !!formValues[topping]),
+                        special: formValues.special,
+                      };
+    axios.post('https://reqres.in/api/orders', newOrder)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+    setFormValues(initialFormValues);
+    setFormErrors(initialFormErrors);
   }
 
   useEffect(() => {
@@ -75,8 +105,9 @@ const App = () => {
             setFormValues={setFormValues}
             formErrors={formErrors}
             setFormErrors={setFormErrors}
-            onChange={onChange}
             disabled={disabled}
+            onChange={onChange}
+            onSubmit={onSubmit}
           />
         </Route>
       </BrowserRouter>

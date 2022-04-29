@@ -53,3 +53,7 @@
 #order-button {
   width: 30%;
 }
+
+.errors {
+  color: red;
+}
