@@ -35,8 +35,16 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Demonstrate your understanding of this week's concepts by answering the following free-form questions. Edit this document to include your answers after each question.
 
 1. In 1-2 sentences, explain what React's `useRouteMatch` hook is used for.
+
+When matching the URLs linked to by React Router Link components, to URLs searched for by Route components, we may sometimes want to link to lots of different versions of essentially the same route with only one small piece change. useRouteMatch lets us set a url variable and a path variable, which we can then interpolate in our Link to and Route path attributes to link to the correct route even in variable-quantity nested components.
+
 1. How would you explain form validation to someone who has never programmed before?
+
+You know when you try to change your password on some website and accidentally type 1 character, backspace, and click out of the box, and you get a message like 'Password must contain at least 1 letter and 1 number'? Behind the scenes, the logic that looks at what you've typed and decides whether you've typed it correctly and you get to click the Change Password button, has to have some way of telling you what you've done wrong [otherwise you wouldn't know], and the easiest time for it to start yelling at you is when you click out of that box. It doesn't make sense, but it's a machine and it only knows what you're doing on the page, and yelling at you because of any *other* action you took on the page would make even *less* sense. And if it didn't yell at you, how would you know what your password needed to contain? 
+
 1. In 1-2 sentences, define end to end testing.
+
+End-to-end testing is a testing paradigm that tries to simulate the entire user experience of an application, rather than merely testing a few individual functions.
 
 ## Instructions
 
