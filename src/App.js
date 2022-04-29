@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Link, Route } from 'react-router-dom';
+import PizzaForm from './PizzaForm.js';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         </Route>
        
         <Route path='/pizza'>
+          <PizzaForm />
         </Route>
       </BrowserRouter>
     </div>
