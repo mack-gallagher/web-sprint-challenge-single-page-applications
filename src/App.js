@@ -1,6 +1,6 @@
 import './App.css'
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Link, Route } from 'react-router-dom';
+import { BrowserRouter, Link, NavLink, Route } from 'react-router-dom';
 import PizzaForm from './PizzaForm.js';
 
 /* VALIDATION */
@@ -92,25 +92,37 @@ const App = () => {
   return (
     <div className="App">
       <h1>Lambda Eats</h1>
-      <BrowserRouter>
-        <Link to='/'>Home</Link>
-        <Link to='/pizza' id='order-pizza'>Order</Link>
+      <div className='nav-links'>
+        <NavLink 
+          exact to='/' 
+          className='nav-link'
+        >
+          Home
+        </NavLink>
+        <NavLink 
+          to='/pizza' 
+          id='order-pizza'
+          className='nav-link'
+        >
+          Order
+        </NavLink>
+      </div>
 
-        <Route path='/'>
-        </Route>
-       
-        <Route path='/pizza'>
-          <PizzaForm
-            formValues={formValues}
-            setFormValues={setFormValues}
-            formErrors={formErrors}
-            setFormErrors={setFormErrors}
-            disabled={disabled}
-            onChange={onChange}
-            onSubmit={onSubmit}
-          />
-        </Route>
-      </BrowserRouter>
+      <Route exact path='/'>
+        <img className='pizza-img' src={require('./Assets/Pizza.jpg')} />
+      </Route>
+     
+      <Route path='/pizza'>
+        <PizzaForm
+          formValues={formValues}
+          setFormValues={setFormValues}
+          formErrors={formErrors}
+          setFormErrors={setFormErrors}
+          disabled={disabled}
+          onChange={onChange}
+          onSubmit={onSubmit}
+         />
+      </Route>
     </div>
   );
 };
